@@ -15,10 +15,8 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 	const t = useT()
 	const a = t.admin
 	const [slug, setSlug] = useState(initial?.slug ?? "")
-	const [name, setName] = useState(initial?.name ?? "")
 	const [nickname, setNickname] = useState(initial?.nickname ?? "")
 	const [year, setYear] = useState(initial?.year ?? 68)
-	const [school, setSchool] = useState(initial?.school ?? "")
 	const [achievements, setAchievements] = useState(initial?.achievements.join("\n") ?? "")
 	const [apps, setApps] = useState<Application[]>(initial?.applications ?? [])
 	const [file, setFile] = useState<File | null>(null)
@@ -37,10 +35,8 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 		try {
 			const body = {
 				slug,
-				name,
 				nickname,
 				year,
-				school,
 				achievements: achievements
 					.split("\n")
 					.map((s) => s.trim())
@@ -68,14 +64,6 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 				<label className={label}>
 					{a.nickname}
 					<input className={field} value={nickname} onChange={(e) => setNickname(e.target.value)} />
-				</label>
-				<label className={label}>
-					{a.name}
-					<input className={field} value={name} onChange={(e) => setName(e.target.value)} />
-				</label>
-				<label className={label}>
-					{a.school}
-					<input className={field} value={school} onChange={(e) => setSchool(e.target.value)} />
 				</label>
 				<label className={label}>
 					{a.year}

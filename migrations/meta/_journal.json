@@ -15,6 +15,13 @@
       "when": 1793442896102,
       "tag": "0001_roles",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793446200306,
+      "tag": "0002_drop_name_school",
+      "breakpoints": true
     }
   ]
 }

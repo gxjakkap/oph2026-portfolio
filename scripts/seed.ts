@@ -72,7 +72,7 @@ for (const path of names) {
 
 	const display = rawName === "unnamed" ? "Unnamed" : rawName[0].toUpperCase() + rawName.slice(1)
 	sql.push(
-		`INSERT INTO portfolios (id, slug, name, nickname, year, school, achievements, published, file_version) VALUES (${q(id)}, ${q(slug)}, ${q(display)}, ${q(display)}, 68, ${q("ตัวอย่าง (sample)")}, '[]', 1, ${q(version)});`,
+		`INSERT INTO portfolios (id, slug, nickname, year, achievements, published, file_version) VALUES (${q(id)}, ${q(slug)}, ${q("พี่" + display)}, 68, '[]', 1, ${q(version)});`,
 		`INSERT INTO applications (id, portfolio_id, program, round, project) VALUES (${q(id + "-1")}, ${q(id)}, ${q(programs[prog.toLowerCase()])}, 1, ${q(projects[proj?.toLowerCase() ?? ""] ?? "ไม่ระบุ")});`
 	)
 	console.log(`${slug}: ${(pdf.size / 1e6).toFixed(1)} MB`)

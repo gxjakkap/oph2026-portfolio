@@ -1,9 +1,10 @@
-import { Chip, Tag, TagGroup } from "@heroui/react"
+import { Tag, TagGroup } from "@heroui/react"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { useMemo } from "react"
 
+import { ApplicationBadges } from "../ApplicationBadges"
 import mascotLook from "../assets/mascot-look.webp"
-import { getPublished, programColor, programs, type Portfolio, type Program } from "../data"
+import { getPublished, programs, type Portfolio, type Program } from "../data"
 import { useT } from "../i18n"
 
 type Search = { program?: Program; round?: 1 | 2; project?: string }
@@ -143,7 +144,6 @@ function FilterRow<K extends string | number>(props: {
 }
 
 function Card({ p }: { p: Portfolio }) {
-	const t = useT()
 	return (
 		<Link
 			to="/p/$slug"
@@ -156,18 +156,9 @@ function Card({ p }: { p: Portfolio }) {
 				className="aspect-[3/4] w-full border-b-3 border-navy bg-white object-cover object-top"
 			/>
 			<div className="p-3">
-				<p className="font-extrabold leading-tight">
-					{p.nickname} <span className="font-semibold text-navy/70">· {p.name}</span>
-				</p>
-				<p className="mt-0.5 line-clamp-1 text-sm text-navy/70">{p.school}</p>
-				<div className="mt-2 flex flex-wrap gap-1">
-					{p.applications.map((a, i) => (
-						<Chip key={i} size="sm" className={`font-semibold ${programColor[a.program]}`}>
-							<Chip.Label>
-								{t.programsShort[a.program]} · {t.roundN(a.round)}
-							</Chip.Label>
-						</Chip>
-					))}
+				<p className="text-lg font-extrabold leading-tight">{p.nickname}</p>
+				<div className="mt-2 flex flex-col gap-1">
+					<ApplicationBadges apps={p.applications} />
 				</div>
 			</div>
 		</Link>

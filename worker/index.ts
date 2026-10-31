@@ -29,9 +29,7 @@ const slugOf = (v: unknown) => {
 function parseFields(b: Record<string, unknown>) {
 	const out: Partial<typeof portfolios.$inferInsert> = {}
 	if ("slug" in b) out.slug = slugOf(b.slug)
-	if ("name" in b) out.name = str(b.name, "name")
 	if ("nickname" in b) out.nickname = str(b.nickname, "nickname")
-	if ("school" in b) out.school = str(b.school, "school")
 	if ("year" in b) {
 		if (!Number.isInteger(b.year) || (b.year as number) < 50 || (b.year as number) > 99)
 			throw bad("year: TCAS year, e.g. 68")

@@ -20,18 +20,16 @@ export function PortfolioView({ p, back }: { p: Portfolio; back?: ReactNode }) {
 					</Link>
 				)}
 				<h1 className="mt-3 text-2xl font-extrabold leading-tight">{p.nickname}</h1>
-				<p className="font-semibold">{p.name}</p>
-				<p className="mt-1 text-sm text-navy/70">
-					{p.school} · TCAS{p.year}
-				</p>
+				<p className="mt-1 text-sm text-navy/70">TCAS{p.year}</p>
 
 				<h2 className="mt-5 text-sm font-extrabold uppercase tracking-wide text-plum">{t.applied}</h2>
 				<ul className="mt-2 flex flex-col gap-2">
 					{p.applications.map((a, i) => (
 						<li key={i} className={`rounded-xl px-3 py-2 text-sm ${programColor[a.program]}`}>
-							<span className="font-bold">{t.programs[a.program]}</span>
-							<br />
-							{t.roundN(a.round)} · {a.project}
+							<p className="font-bold">{t.programs[a.program]}</p>
+							<span className="mt-1 inline-block rounded-full border-2 border-navy bg-cream px-2 py-0.5 text-xs font-semibold text-navy">
+								{a.project} · {t.roundN(a.round)}
+							</span>
 						</li>
 					))}
 				</ul>

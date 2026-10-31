@@ -15,10 +15,8 @@ export type Application = { program: Program; round: 1 | 2; project: string }
 export type Portfolio = {
 	id: string
 	slug: string
-	name: string
 	nickname: string
 	year: number // TCAS year, e.g. 68
-	school: string
 	achievements: string[]
 	published: boolean
 	fileVersion: string | null

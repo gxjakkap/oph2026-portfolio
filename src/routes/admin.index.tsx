@@ -3,7 +3,8 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router"
 import { useState } from "react"
 
 import { btn, btnDanger, btnPrimary, panel } from "../admin/ui"
-import { admin, programColor, type Portfolio } from "../data"
+import { ApplicationBadges } from "../ApplicationBadges"
+import { admin, type Portfolio } from "../data"
 import { useT } from "../i18n"
 
 export const Route = createFileRoute("/admin/")({
@@ -63,9 +64,7 @@ function AdminList() {
 							<div className="h-20 w-15 shrink-0 rounded-lg border-2 border-dashed border-navy/40" />
 						)}
 						<div className="min-w-0 flex-1">
-							<p className="font-extrabold">
-								{p.nickname || "—"} <span className="font-semibold text-navy/70">· {p.name || "—"}</span>
-							</p>
+							<p className="font-extrabold">{p.nickname || "—"}</p>
 							<p className="font-mono text-xs text-navy/60">/p/{p.slug}</p>
 							<div className="mt-1 flex flex-wrap gap-1">
 								<span
@@ -73,11 +72,9 @@ function AdminList() {
 									{p.published ? a.published : a.draft}
 								</span>
 								{!p.pdf && <span className="rounded-full bg-sun px-2 py-0.5 text-xs font-bold">{a.noPdf}</span>}
-								{p.applications.map((x, i) => (
-									<span key={i} className={`rounded-full px-2 py-0.5 text-xs font-semibold ${programColor[x.program]}`}>
-										{t.programsShort[x.program]} · {t.roundN(x.round)} · {x.project}
-									</span>
-								))}
+							</div>
+							<div className="mt-1 flex flex-col gap-1">
+								<ApplicationBadges apps={p.applications} />
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-2">

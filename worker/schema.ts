@@ -17,10 +17,8 @@ const timestamps = {
 export const portfolios = sqliteTable("portfolios", {
 	id: id(),
 	slug: text("slug").notNull().unique(),
-	name: text("name").notNull().default(""),
 	nickname: text("nickname").notNull().default(""),
 	year: integer("year").notNull().default(68), // TCAS year
-	school: text("school").notNull().default(""),
 	achievements: text("achievements", { mode: "json" })
 		.$type<string[]>()
 		.notNull()
