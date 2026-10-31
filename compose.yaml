@@ -1,0 +1,33 @@
+# RustFS: local stand-in for R2 (S3 API on :9000, console on :9001, devkey / devsecret).
+# The Worker talks to it with the same S3 calls it uses for R2 in prod (see .dev.vars.example).
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    command: /data
+    ports: ["9000:9000", "9001:9001"]
+    volumes: [rustfs:/data]
+    environment:
+      RUSTFS_ACCESS_KEY: devkey
+      RUSTFS_SECRET_KEY: devsecret
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_CONSOLE_ENABLE: "true"
+
+  # bucket with public read + CORS for browser uploads, like R2 behind portfolio-files.cpesu.com
+  bucket:
+    image: amazon/aws-cli
+    depends_on: [rustfs]
+    environment:
+      AWS_ACCESS_KEY_ID: devkey
+      AWS_SECRET_ACCESS_KEY: devsecret
+      AWS_DEFAULT_REGION: us-east-1
+    entrypoint: >
+      sh -c 'S3="aws --endpoint-url http://rustfs:9000 s3api";
+      until $$S3 head-bucket --bucket oph2026-portfolio 2>/dev/null || $$S3 create-bucket --bucket oph2026-portfolio; do sleep 1; done
+      && $$S3 put-bucket-policy --bucket oph2026-portfolio
+      --policy "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::oph2026-portfolio/*\"}]}"
+      && $$S3 put-bucket-cors --bucket oph2026-portfolio
+      --cors-configuration "{\"CORSRules\":[{\"AllowedOrigins\":[\"*\"],\"AllowedMethods\":[\"GET\",\"HEAD\",\"PUT\"],\"AllowedHeaders\":[\"*\"],\"ExposeHeaders\":[\"ETag\",\"Content-Length\",\"Accept-Ranges\",\"Content-Range\"]}]}"'
+
+volumes:
+  rustfs:

@@ -1,0 +1,11 @@
+# copy to .dev.vars for `bun run dev` (local RustFS from compose.yaml + a Discord app with
+# redirect http://localhost:5173/api/auth/callback/discord)
+BETTER_AUTH_URL=http://localhost:5173
+BETTER_AUTH_SECRET=dev-secret-change-me-at-least-32-chars-long
+FILES_URL=http://localhost:9000/oph2026-portfolio
+S3_ENDPOINT=http://localhost:9000
+S3_BUCKET=oph2026-portfolio
+S3_ACCESS_KEY_ID=devkey
+S3_SECRET_ACCESS_KEY=devsecret
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=

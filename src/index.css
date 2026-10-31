@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --color-cream: #fff8ef;
+  --color-navy: #1e2331;
+  --color-plum: #382063;
+  --color-lilac: #8e61ad;
+  --color-teal: #5cc8b7;
+  --color-sun: #e7ce69;
+  --font-sans: "Plus Jakarta Sans", "Noto Sans Thai", system-ui, sans-serif;
+}
+
+/* fixed layer instead of background-attachment: fixed, which iOS Safari ignores */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #1b1450 url(/bg.webp) center / cover;
+}

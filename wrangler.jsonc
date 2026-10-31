@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oph2026-portfolio",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "oph2026-portfolio",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // public values; secrets (S3 keys, auth, Discord) go in .dev.vars locally and `wrangler secret put` in prod
+  "vars": {
+    "BETTER_AUTH_URL": "https://portfolio.cpesu.com",
+    "FILES_URL": "https://portfolio-files.cpesu.com",
+    "S3_ENDPOINT": "https://bd9bb043cf4f5871232d3baaa5c6abf0.r2.cloudflarestorage.com",
+    "S3_BUCKET": "oph2026-portfolio"
+  },
+  "observability": { "enabled": true }
+}
