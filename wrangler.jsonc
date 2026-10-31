@@ -1,9 +1,11 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "oph2026-portfolio",
+	"account_id": "bd9bb043cf4f5871232d3baaa5c6abf0",
 	"main": "worker/index.ts",
 	"compatibility_date": "2026-10-01",
 	"compatibility_flags": ["nodejs_compat"],
+	"routes": [{ "pattern": "portfolio.cpesu.com", "custom_domain": true }],
 	"assets": {
 		"not_found_handling": "single-page-application",
 		"run_worker_first": ["/api/*"],
@@ -12,7 +14,7 @@
 		{
 			"binding": "DB",
 			"database_name": "oph2026-portfolio",
-			"database_id": "00000000-0000-0000-0000-000000000000",
+			"database_id": "c0ad6c15-4124-4c64-a020-a812909fb99d",
 			"migrations_dir": "migrations",
 		},
 	],
