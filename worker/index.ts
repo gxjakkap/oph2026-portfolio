@@ -12,7 +12,7 @@ const MAX_COVER_BYTES = 2 * 1024 * 1024
 type Actor = { name: string; discordId: string; role: Role }
 type Db = ReturnType<typeof getDb>
 
-// ---- validation (admin input is still untrusted input) ----
+// validation
 
 const bad = (msg: string) => new HTTPException(400, { message: msg })
 const str = (v: unknown, field: string, max = 200) => {
@@ -57,7 +57,7 @@ function parseApplications(v: unknown): Application[] {
 	})
 }
 
-// ---- reads ----
+// reads
 
 async function load(db: Db, where?: ReturnType<typeof eq>) {
 	const rows = await db.select().from(portfolios).where(where).orderBy(desc(portfolios.updatedAt))
@@ -97,7 +97,7 @@ async function one(db: Db, id: string) {
 	return p
 }
 
-// slug from a filename or name: "reg_Thamonnut_goodstudent" -> "reg-thamonnut-goodstudent"; unique-ified with -2, -3...
+// slug from a filename or name
 async function freeSlug(db: Db, wanted: string) {
 	const base =
 		wanted
@@ -122,7 +122,7 @@ const audit = (
 		.insert(auditLog)
 		.values({ actor: actor.name, actorDiscordId: actor.discordId, action, portfolioId: p.id, slug: p.slug, snapshot })
 
-// ---- auth ----
+// auth
 
 type AdminEnv = { Bindings: Env; Variables: { actor: Actor } }
 
@@ -148,7 +148,7 @@ const requireAdmin = createMiddleware<AdminEnv>(async (c, next) => {
 	await next()
 })
 
-// ---- users (the allowlist) ----
+// users (the allowlist)
 
 const DISCORD_ID = /^\d{17,20}$/
 const roleOf = (v: unknown) => {
@@ -221,7 +221,7 @@ const usersApi = new Hono<AdminEnv>()
 		return c.body(null, 204)
 	})
 
-// ---- routes ----
+// route
 
 const adminApi = new Hono<AdminEnv>()
 	.use(requireStaff)
@@ -287,7 +287,7 @@ const adminApi = new Hono<AdminEnv>()
 		await audit(db, c.get("actor"), "delete", p, p)
 		return c.body(null, 204)
 	})
-	// step 1 of an upload: presigned PUT urls for a new file version
+	// step 1 of an upload: presigned PUT urls
 	.post("/portfolios/:id/upload", async (c) => {
 		const p = await one(getDb(c.env), c.req.param("id"))
 		const { pdfSize, coverSize, coverType } = await c.req.json<{
