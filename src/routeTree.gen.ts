@@ -15,6 +15,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 import { Route as AdminNewRouteImport } from './routes/admin.new'
 import { Route as AdminUploadRouteImport } from './routes/admin.upload'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as PSlugRouteImport } from './routes/p.$slug'
 import { Route as AdminIdIndexRouteImport } from './routes/admin.$id.index'
@@ -50,6 +51,11 @@ const AdminUploadRoute = AdminUploadRouteImport.update({
   path: '/upload',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin_/login',
   path: '/admin/login',
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/new': typeof AdminNewRoute
   '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/login': typeof AdminLoginRoute
   '/p/$slug': typeof PSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/new': typeof AdminNewRoute
   '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/login': typeof AdminLoginRoute
   '/p/$slug': typeof PSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/admin/audit': typeof AdminAuditRoute
   '/admin/new': typeof AdminNewRoute
   '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin_/login': typeof AdminLoginRoute
   '/p/$slug': typeof PSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/new'
     | '/admin/upload'
+    | '/admin/users'
     | '/admin/login'
     | '/p/$slug'
     | '/admin/'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/new'
     | '/admin/upload'
+    | '/admin/users'
     | '/admin/login'
     | '/p/$slug'
     | '/admin'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/admin/audit'
     | '/admin/new'
     | '/admin/upload'
+    | '/admin/users'
     | '/admin_/login'
     | '/p/$slug'
     | '/admin/'
@@ -196,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUploadRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin_/login': {
       id: '/admin_/login'
       path: '/admin/login'
@@ -231,6 +250,7 @@ interface AdminRouteChildren {
   AdminAuditRoute: typeof AdminAuditRoute
   AdminNewRoute: typeof AdminNewRoute
   AdminUploadRoute: typeof AdminUploadRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminIdPreviewRoute: typeof AdminIdPreviewRoute
   AdminIdIndexRoute: typeof AdminIdIndexRoute
@@ -240,6 +260,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminAuditRoute: AdminAuditRoute,
   AdminNewRoute: AdminNewRoute,
   AdminUploadRoute: AdminUploadRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminIdPreviewRoute: AdminIdPreviewRoute,
   AdminIdIndexRoute: AdminIdIndexRoute,

@@ -1,3 +1,4 @@
+import { ClockCounterClockwise, CloudArrowUp, FolderOpen, SignOut, Users } from "@phosphor-icons/react"
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router"
 
 import { authClient } from "../auth"
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/admin")({
 })
 
 const tab =
-	"rounded-full border-2 border-navy bg-cream px-3 py-1 text-sm font-bold text-navy data-[status=active]:bg-plum data-[status=active]:text-cream"
+	"inline-flex items-center gap-1.5 rounded-full border-2 border-navy bg-cream px-3 py-1 text-sm font-bold text-navy data-[status=active]:bg-plum data-[status=active]:text-cream"
 
 function AdminLayout() {
 	const t = useT().admin
@@ -30,18 +31,30 @@ function AdminLayout() {
 			<nav className="mb-6 flex flex-wrap items-center gap-2 rounded-3xl border-3 border-navy bg-cream p-3 shadow-[5px_5px_0_var(--color-navy)]">
 				<span className="mr-2 font-extrabold text-navy">{t.title}</span>
 				<Link to="/admin" activeOptions={{ exact: true }} className={tab}>
+					<FolderOpen />
 					{t.portfolios}
 				</Link>
 				<Link to="/admin/upload" className={tab}>
+					<CloudArrowUp />
 					{t.bulk}
 				</Link>
 				<Link to="/admin/audit" className={tab}>
+					<ClockCounterClockwise />
 					{t.audit}
 				</Link>
-				<span className="ml-auto text-sm text-navy/70">{me.name}</span>
+				{me.role === "admin" && (
+					<Link to="/admin/users" className={tab}>
+						<Users />
+						{t.users}
+					</Link>
+				)}
+				<span className="ml-auto text-sm text-navy/70">
+					{me.name} · {t.roles[me.role]}
+				</span>
 				<button
 					onClick={() => authClient.signOut().then(() => location.assign("/admin/login"))}
-					className="text-sm font-semibold text-lilac hover:underline">
+					className="inline-flex items-center gap-1 text-sm font-semibold text-lilac hover:underline">
+					<SignOut />
 					{t.signOut}
 				</button>
 			</nav>

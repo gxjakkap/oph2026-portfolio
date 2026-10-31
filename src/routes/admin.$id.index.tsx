@@ -1,3 +1,4 @@
+import { Eye } from "@phosphor-icons/react"
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router"
 
 import { PortfolioForm } from "../admin/PortfolioForm"
@@ -31,6 +32,7 @@ function Edit() {
 					{p.published ? a.published : a.draft}
 				</span>
 				<Link to="/admin/$id/preview" params={{ id: p.id }} className={`${btn} ml-auto`}>
+					<Eye />
 					{a.preview}
 				</Link>
 			</div>

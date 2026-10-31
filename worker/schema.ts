@@ -45,10 +45,13 @@ export const applications = sqliteTable(
 	(t) => [index("applications_portfolio_idx").on(t.portfolioId)]
 )
 
-// Discord user ids allowed into /admin. No UI: `wrangler d1 execute` (see README)
+// Discord user ids allowed into /admin. staff: manage portfolios; admin: staff + manage this list (/admin/users)
 export const admins = sqliteTable("admins", {
 	discordId: text("discord_id").primaryKey(),
 	note: text("note"),
+	role: text("role", { enum: ["staff", "admin"] })
+		.notNull()
+		.default("staff"),
 })
 
 export const auditLog = sqliteTable("audit_log", {

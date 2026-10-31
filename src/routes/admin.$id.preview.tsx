@@ -1,3 +1,4 @@
+import { ArrowLeft } from "@phosphor-icons/react"
 import { createFileRoute, Link, notFound } from "@tanstack/react-router"
 
 import { admin } from "../data"
@@ -17,8 +18,12 @@ function Preview() {
 	const p = Route.useLoaderData()
 	const a = useT().admin
 	const back = (
-		<Link to="/admin/$id" params={{ id: p.id }} className="text-sm font-semibold text-lilac hover:underline">
-			← {a.backToEdit}
+		<Link
+			to="/admin/$id"
+			params={{ id: p.id }}
+			className="inline-flex items-center gap-1 text-sm font-semibold text-lilac hover:underline">
+			<ArrowLeft />
+			{a.backToEdit}
 		</Link>
 	)
 	return (

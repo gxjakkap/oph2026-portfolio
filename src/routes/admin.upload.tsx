@@ -1,3 +1,4 @@
+import { CheckCircle, CircleNotch, CloudArrowUp, HourglassMedium, WarningCircle } from "@phosphor-icons/react"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { useState } from "react"
 
@@ -47,6 +48,7 @@ function Bulk() {
 				onDragLeave={() => setOver(false)}
 				onDrop={(e) => (e.preventDefault(), setOver(false), start([...e.dataTransfer.files]))}
 				className={`${panel} flex cursor-pointer flex-col items-center gap-2 border-dashed py-12 text-center font-semibold ${over ? "bg-sun" : ""}`}>
+				<CloudArrowUp size={56} />
 				{a.bulkHint}
 				<input
 					type="file"
@@ -62,9 +64,10 @@ function Bulk() {
 						<li key={i} className="flex flex-wrap items-center gap-3 py-2">
 							<span className="min-w-0 flex-1 truncate font-mono text-sm">{x.name}</span>
 							<span
-								className={`rounded-full px-2 py-0.5 text-xs font-bold ${
+								className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold ${
 									x.status === "done" ? "bg-teal" : x.status === "failed" ? "bg-red-200 text-red-900" : "bg-navy/10"
 								}`}>
+								<StatusIcon status={x.status} />
 								{a.status[x.status]}
 							</span>
 							{x.id && (
@@ -83,3 +86,14 @@ function Bulk() {
 		</div>
 	)
 }
+
+const StatusIcon = ({ status }: { status: Item["status"] }) =>
+	status === "done" ? (
+		<CheckCircle />
+	) : status === "failed" ? (
+		<WarningCircle />
+	) : status === "uploading" ? (
+		<CircleNotch className="motion-safe:animate-spin" />
+	) : (
+		<HourglassMedium />
+	)

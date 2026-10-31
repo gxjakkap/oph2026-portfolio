@@ -1,7 +1,7 @@
-import type { AuditEntry, Portfolio, Program } from "../shared/types"
+import type { AuditEntry, Member, Portfolio, Program, Role } from "../shared/types"
 
-export { MAX_PDF_BYTES, programs } from "../shared/types"
-export type { Application, AuditEntry, Portfolio, Program } from "../shared/types"
+export { MAX_PDF_BYTES, programs, roles } from "../shared/types"
+export type { Application, AuditEntry, Member, Portfolio, Program, Role } from "../shared/types"
 
 // program colour coding, shared by the grid chips and the detail panels
 export const programColor: Record<Program, string> = {
@@ -38,7 +38,7 @@ export const getPublished = () =>
 	(published ??= api<Portfolio[]>("/portfolios").catch((e) => ((published = undefined), Promise.reject(e))))
 
 export const admin = {
-	me: () => api<{ name: string; discordId: string }>("/admin/me"),
+	me: () => api<{ name: string; discordId: string; role: Role }>("/admin/me"),
 	list: () => api<Portfolio[]>("/admin/portfolios"),
 	create: (body: Partial<Portfolio> & { filename?: string }) =>
 		api<Portfolio>("/admin/portfolios", { method: "POST", json: body }),
@@ -46,4 +46,10 @@ export const admin = {
 		api<Portfolio>(`/admin/portfolios/${id}`, { method: "PATCH", json: body }),
 	remove: (id: string) => api<void>(`/admin/portfolios/${id}`, { method: "DELETE" }),
 	audit: () => api<AuditEntry[]>("/admin/audit"),
+	users: () => api<Member[]>("/admin/users"),
+	addUser: (body: { discordId: string; note: string; role: Role }) =>
+		api<Member>("/admin/users", { method: "POST", json: body }),
+	updateUser: (discordId: string, body: Partial<Pick<Member, "note" | "role">>) =>
+		api<Member>(`/admin/users/${discordId}`, { method: "PATCH", json: body }),
+	removeUser: (discordId: string) => api<void>(`/admin/users/${discordId}`, { method: "DELETE" }),
 }

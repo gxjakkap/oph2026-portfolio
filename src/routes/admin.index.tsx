@@ -1,3 +1,4 @@
+import { CloudArrowUp, Globe, GlobeX, PencilSimple, Plus, Trash } from "@phosphor-icons/react"
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router"
 import { useState } from "react"
 
@@ -39,9 +40,11 @@ function AdminList() {
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-wrap gap-3">
 				<Link to="/admin/new" className={btnPrimary}>
+					<Plus />
 					{a.new}
 				</Link>
 				<Link to="/admin/upload" className={`${btn} self-center`}>
+					<CloudArrowUp />
 					{a.bulk}
 				</Link>
 			</div>
@@ -79,15 +82,18 @@ function AdminList() {
 						</div>
 						<div className="flex flex-wrap gap-2">
 							<Link to="/admin/$id" params={{ id: p.id }} className={btn}>
+								<PencilSimple />
 								{a.edit}
 							</Link>
 							<button
 								className={btn}
 								disabled={busy === p.id}
 								onClick={() => run(p.id, () => admin.update(p.id, { published: !p.published }))}>
+								{p.published ? <GlobeX /> : <Globe />}
 								{p.published ? a.unpublish : a.publish}
 							</button>
 							<button className={btnDanger} disabled={busy === p.id} onClick={() => remove(p)}>
+								<Trash />
 								{a.del}
 							</button>
 						</div>

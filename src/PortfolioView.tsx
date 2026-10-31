@@ -1,3 +1,4 @@
+import { ArrowLeft } from "@phosphor-icons/react"
 import { Link } from "@tanstack/react-router"
 import type { ReactNode } from "react"
 
@@ -13,8 +14,9 @@ export function PortfolioView({ p, back }: { p: Portfolio; back?: ReactNode }) {
 		<div className="flex flex-col gap-6 lg:flex-row-reverse lg:items-start">
 			<aside className="shrink-0 rounded-3xl border-3 border-navy bg-cream p-5 text-navy shadow-[5px_5px_0_var(--color-navy)] lg:sticky lg:top-4 lg:w-80">
 				{back ?? (
-					<Link to="/" className="text-sm font-semibold text-lilac hover:underline">
-						← {t.back}
+					<Link to="/" className="inline-flex items-center gap-1 text-sm font-semibold text-lilac hover:underline">
+						<ArrowLeft />
+						{t.back}
 					</Link>
 				)}
 				<h1 className="mt-3 text-2xl font-extrabold leading-tight">{p.nickname}</h1>

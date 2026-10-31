@@ -1,4 +1,5 @@
 import { Button } from "@heroui/react"
+import { DiscordLogo, SignOut } from "@phosphor-icons/react"
 import { createFileRoute } from "@tanstack/react-router"
 
 import mascotLook from "../assets/mascot-look.webp"
@@ -25,6 +26,7 @@ function Login() {
 					<Button
 						onPress={() => authClient.signIn.social({ provider: "discord", callbackURL: "/admin" })}
 						className="rounded-full border-3 border-navy bg-plum px-6 font-extrabold text-cream shadow-[3px_3px_0_var(--color-navy)]">
+						<DiscordLogo size="1.4em" />
 						{t.login}
 					</Button>
 				</>
@@ -36,6 +38,7 @@ function Login() {
 					<Button
 						onPress={() => authClient.signOut().then(() => location.assign("/admin/login"))}
 						className="rounded-full border-3 border-navy bg-cream font-bold text-navy">
+						<SignOut />
 						{t.signOut}
 					</Button>
 				</>

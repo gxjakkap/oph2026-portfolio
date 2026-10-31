@@ -1,3 +1,4 @@
+import { FilePdf, FloppyDisk, Plus, X } from "@phosphor-icons/react"
 import { useState } from "react"
 
 import { admin, programs, type Application, type Portfolio } from "../data"
@@ -136,6 +137,7 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 							onChange={(e) => setApp(i, { project: e.target.value })}
 						/>
 						<button type="button" className={btn} onClick={() => setApps(apps.filter((_, j) => j !== i))}>
+							<X />
 							{a.remove}
 						</button>
 					</div>
@@ -149,6 +151,7 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 					type="button"
 					className={`${btn} self-start`}
 					onClick={() => setApps([...apps, { program: "regular", round: 1, project: "" }])}>
+					<Plus />
 					{a.addApplication}
 				</button>
 			</fieldset>
@@ -173,7 +176,12 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 					}}
 				/>
 				{initial?.pdf && (
-					<a href={initial.pdf} target="_blank" rel="noreferrer" className="font-semibold text-lilac hover:underline">
+					<a
+						href={initial.pdf}
+						target="_blank"
+						rel="noreferrer"
+						className="inline-flex items-center gap-1 font-semibold text-lilac hover:underline">
+						<FilePdf />
 						{a.currentPdf}
 					</a>
 				)}
@@ -182,6 +190,7 @@ export function PortfolioForm({ initial, projects, onSaved }: Props) {
 			{error && <p className="rounded-xl bg-red-100 px-3 py-2 text-sm font-semibold text-red-800">{error}</p>}
 			<div className="flex items-center gap-3">
 				<button type="submit" className={btnPrimary} disabled={!!busy}>
+					<FloppyDisk />
 					{busy || a.save}
 				</button>
 				{saved && <span className="text-sm font-semibold text-navy/70">{a.saved}</span>}
