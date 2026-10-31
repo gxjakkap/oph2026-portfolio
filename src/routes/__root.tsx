@@ -17,7 +17,7 @@ function Root() {
 	return (
 		// icons: bold to match the thick outlines, text-sized, decorative (always beside a text label)
 		<IconContext.Provider value={{ weight: "bold", size: "1.15em", "aria-hidden": true }}>
-			<header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pt-4">
+			<header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pt-[max(1rem,env(safe-area-inset-top))]">
 				<Link to="/" search={{}}>
 					<img src={title} alt="CPE Open House 2026" className="h-20 w-auto sm:h-28" />
 				</Link>
@@ -35,7 +35,7 @@ function Root() {
 					</Button>
 				</div>
 			</header>
-			<main className="mx-auto max-w-7xl px-4 pt-4 pb-16">
+			<main className="mx-auto max-w-7xl px-4 pt-4 pb-[calc(4rem+env(safe-area-inset-bottom))]">
 				<Outlet />
 			</main>
 		</IconContext.Provider>

@@ -55,7 +55,6 @@ function Home() {
 		<>
 			<div className="mb-6 text-cream">
 				<h1 className="text-3xl font-extrabold sm:text-4xl">{t.heading}</h1>
-				<p className="mt-1 text-cream/80">{t.sub}</p>
 			</div>
 
 			<div className="mb-8 flex flex-col gap-3 rounded-3xl border-3 border-navy bg-cream p-5 shadow-[5px_5px_0_var(--color-navy)]">

@@ -28,7 +28,7 @@ export function PortfolioView({ p, back }: { p: Portfolio; back?: ReactNode }) {
 						<li key={i} className={`rounded-xl px-3 py-2 text-sm ${programColor[a.program]}`}>
 							<p className="font-bold">{t.programs[a.program]}</p>
 							<span className="mt-1 inline-block rounded-full border-2 border-navy bg-cream px-2 py-0.5 text-xs font-semibold text-navy">
-								{a.project} · {t.roundN(a.round)}
+								{a.project} - {t.roundN(a.round)}
 							</span>
 						</li>
 					))}

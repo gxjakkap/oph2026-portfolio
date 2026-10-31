@@ -21,15 +21,12 @@ function Login() {
 			<img src={mascotLook} alt="" className="w-28" />
 			<h1 className="text-2xl font-extrabold">{t.title}</h1>
 			{forbidden === undefined ? (
-				<>
-					<p className="text-navy/70">{t.loginHint}</p>
-					<Button
-						onPress={() => authClient.signIn.social({ provider: "discord", callbackURL: "/admin" })}
-						className="rounded-full border-3 border-navy bg-plum px-6 font-extrabold text-cream shadow-[3px_3px_0_var(--color-navy)]">
-						<DiscordLogo size="1.4em" />
-						{t.login}
-					</Button>
-				</>
+				<Button
+					onPress={() => authClient.signIn.social({ provider: "discord", callbackURL: "/admin" })}
+					className="rounded-full border-3 border-navy bg-plum px-6 font-extrabold text-cream shadow-[3px_3px_0_var(--color-navy)]">
+					<DiscordLogo size="1.4em" />
+					{t.login}
+				</Button>
 			) : (
 				<>
 					<p className="font-semibold">{t.forbidden}</p>

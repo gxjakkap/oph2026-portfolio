@@ -1,12 +1,12 @@
 import { useSyncExternalStore } from "react"
 
+import { PDF_COMPRESS_LINK } from "./const"
 import type { Program } from "./data"
 
 const dict = {
 	th: {
 		locale: "th-TH",
-		heading: "พอร์ตโฟลิโอรุ่นพี่ CPE",
-		sub: "พอร์ตจริงที่รุ่นพี่ใช้ยื่นเข้าวิศวกรรมคอมพิวเตอร์ มจธ.",
+		heading: "ตัวอย่างพอร์ตโฟลิโอ CPE",
 		program: "หลักสูตร",
 		round: "รอบ",
 		project: "โครงการ",
@@ -26,9 +26,9 @@ const dict = {
 		admin: {
 			title: "แอดมิน",
 			login: "เข้าสู่ระบบด้วย Discord",
-			loginHint: "สำหรับทีมงานที่ดูแลพอร์ตโฟลิโอ",
 			forbidden: "บัญชี Discord นี้ยังไม่มีสิทธิ์เข้าแอดมิน",
-			forbiddenHint: "ส่ง Discord ID นี้ให้แอดมินเพื่อเพิ่มสิทธิ์:",
+			forbiddenHint: "ส่งข้อความนี้ให้แอดมินเพื่อเพิ่มสิทธิ์:",
+			forbiddenMessage: (id: string) => `สวัสดีค้าบ รบกวนขอสิทธิเข้าใช้เว็บรวมพอร์ตหน่อยคับ ID Discord: ${id}`,
 			signOut: "ออกจากระบบ",
 			portfolios: "พอร์ตโฟลิโอ",
 			bulk: "อัปโหลดหลายไฟล์",
@@ -38,7 +38,7 @@ const dict = {
 			roles: { staff: "ทีมงาน", admin: "แอดมิน" },
 			roleHint: "ทีมงานจัดการพอร์ตโฟลิโอได้ แอดมินจัดการได้ทั้งพอร์ตโฟลิโอและผู้ใช้",
 			discordId: "Discord ID",
-			note: "บันทึก (เช่น ชื่อ)",
+			note: "หมายเหตุ (เช่น ชื่อ)",
 			addUser: "เพิ่มผู้ใช้",
 			you: "คุณ",
 			neverLoggedIn: "ยังไม่เคยเข้าสู่ระบบ",
@@ -57,7 +57,7 @@ const dict = {
 			saved: "บันทึกแล้ว",
 			slug: "ลิงก์ (slug)",
 			slugHint: "a-z, 0-9 และ -",
-			nickname: "ชื่อ (เช่น พี่กันต์)",
+			nickname: "ชื่อ (เช่น พี่เฟม)",
 			year: "TCAS ปี",
 			achievementsHint: "ผลงาน (บรรทัดละหนึ่งรายการ)",
 			applications: "การยื่นสมัคร",
@@ -69,7 +69,7 @@ const dict = {
 			replacePdf: "เปลี่ยนไฟล์ PDF",
 			currentPdf: "เปิดไฟล์ปัจจุบัน",
 			uploading: "กำลังอัปโหลด…",
-			tooBig: "ไฟล์ใหญ่เกิน 25 MB กรุณาบีบอัดก่อน (เช่น ilovepdf.com)",
+			tooBig: `ไฟล์ใหญ่เกิน 25 MB กรุณาบีบอัดก่อน (${PDF_COMPRESS_LINK})`,
 			preview: "ดูตัวอย่าง",
 			previewBanner: "ตัวอย่าง: หน้านี้ยังไม่เผยแพร่",
 			backToEdit: "กลับไปแก้ไข",
@@ -92,8 +92,7 @@ const dict = {
 	},
 	en: {
 		locale: "en-GB",
-		heading: "CPE Senior Portfolios",
-		sub: "Real portfolios our students used to get into Computer Engineering at KMUTT.",
+		heading: "CPE Portfolios example",
 		program: "Program",
 		round: "Round",
 		project: "Project",
@@ -113,9 +112,10 @@ const dict = {
 		admin: {
 			title: "Admin",
 			login: "Log in with Discord",
-			loginHint: "For the team managing the portfolios",
 			forbidden: "This Discord account doesn't have admin access yet",
-			forbiddenHint: "Send this Discord ID to an admin to get access:",
+			forbiddenHint: "Send this message to an admin to get access:",
+			forbiddenMessage: (id: string) =>
+				`Hello, I'm contacting you regarding the portfolio website. I'd like access. My Discord ID is: ${id}, Thanks!`,
 			signOut: "Sign out",
 			portfolios: "Portfolios",
 			bulk: "Bulk upload",
@@ -125,7 +125,7 @@ const dict = {
 			roles: { staff: "Staff", admin: "Admin" },
 			roleHint: "Staff manage portfolios. Admins manage portfolios and users.",
 			discordId: "Discord ID",
-			note: "Note (e.g. name)",
+			note: "Remarks (e.g. name)",
 			addUser: "Add user",
 			you: "you",
 			neverLoggedIn: "Hasn't logged in yet",
@@ -144,7 +144,7 @@ const dict = {
 			saved: "Saved",
 			slug: "Link (slug)",
 			slugHint: "a-z, 0-9 and -",
-			nickname: "Name (e.g. พี่กันต์)",
+			nickname: "Name (e.g. พี่เฟม)",
 			year: "TCAS year",
 			achievementsHint: "Achievements (one per line)",
 			applications: "Applications",
@@ -156,7 +156,7 @@ const dict = {
 			replacePdf: "Replace PDF",
 			currentPdf: "Open current file",
 			uploading: "Uploading…",
-			tooBig: "File is over 25 MB. Please compress it first (e.g. ilovepdf.com).",
+			tooBig: `File is over 25 MB. Please compress it first (${PDF_COMPRESS_LINK}).`,
 			preview: "Preview",
 			previewBanner: "Preview: this page is not published",
 			backToEdit: "Back to editing",

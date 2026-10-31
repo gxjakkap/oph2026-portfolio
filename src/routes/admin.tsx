@@ -49,7 +49,7 @@ function AdminLayout() {
 					</Link>
 				)}
 				<span className="ml-auto text-sm text-navy/70">
-					{me.name} · {t.roles[me.role]}
+					{me.name} [{t.roles[me.role]}]
 				</span>
 				<button
 					onClick={() => authClient.signOut().then(() => location.assign("/admin/login"))}

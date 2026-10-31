@@ -13,7 +13,7 @@ export function ApplicationBadges({ apps }: { apps: Application[] }) {
 			</Chip>
 			<Chip size="sm" className="border-2 border-navy bg-cream font-semibold text-navy">
 				<Chip.Label>
-					{a.project} · {t.roundN(a.round)}
+					{a.project} - {t.roundN(a.round)}
 				</Chip.Label>
 			</Chip>
 		</div>
