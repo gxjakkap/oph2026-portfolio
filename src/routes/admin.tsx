@@ -5,6 +5,8 @@ import { authClient } from "../auth"
 import { admin, ApiError } from "../data"
 import { useT } from "../i18n"
 
+declare const __BUILD__: { sha: string; message: string; date: string }
+
 export const Route = createFileRoute("/admin")({
 	// every /admin page needs an allowlisted Discord login; the API enforces the same check
 	beforeLoad: async () => {
@@ -24,7 +26,7 @@ const tab =
 	"inline-flex items-center gap-1.5 rounded-full border-2 border-navy bg-cream px-3 py-1 text-sm font-bold text-navy data-[status=active]:bg-plum data-[status=active]:text-cream"
 
 function AdminLayout() {
-	const t = useT().admin
+	const { admin: t, locale } = useT()
 	const { me } = Route.useRouteContext()
 	return (
 		<>
@@ -59,6 +61,9 @@ function AdminLayout() {
 				</button>
 			</nav>
 			<Outlet />
+			<footer className="mt-6 text-center font-mono text-xs text-cream/70">
+				{__BUILD__.sha} · {new Date(__BUILD__.date).toLocaleString(locale)} · {__BUILD__.message}
+			</footer>
 		</>
 	)
 }
