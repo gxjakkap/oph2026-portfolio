@@ -147,7 +147,7 @@ function Card({ p }: { p: Portfolio }) {
 		<Link
 			to="/p/$slug"
 			params={{ slug: p.slug }}
-			className="group block overflow-hidden rounded-2xl border-3 border-navy bg-cream text-navy shadow-[5px_5px_0_var(--color-navy)] transition motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-[6px_9px_0_var(--color-navy)]">
+			className="group block h-full overflow-hidden rounded-2xl border-3 border-navy bg-cream text-navy shadow-[5px_5px_0_var(--color-navy)] transition motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-[6px_9px_0_var(--color-navy)]">
 			<img
 				src={p.cover!}
 				alt=""
