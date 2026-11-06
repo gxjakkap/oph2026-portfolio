@@ -74,12 +74,20 @@ function Home() {
 					onChange={(v) => set({ round: v })}
 				/>
 				{projects.length > 0 && (
-					<FilterRow
-						label={t.project}
-						value={project}
-						options={projects.map((p) => [p, p])}
-						onChange={(v) => set({ project: v })}
-					/>
+					<label className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
+						<span className="w-20 shrink-0 text-sm font-extrabold text-navy">{t.project}</span>
+						<select
+							value={project ?? ""}
+							onChange={(e) => set({ project: e.target.value || undefined })}
+							className={`w-full min-w-0 rounded-full border-2 border-navy px-3 py-1 text-sm font-semibold sm:w-auto [&>option]:bg-cream [&>option]:text-navy ${project ? "bg-plum text-cream" : "bg-cream text-navy"}`}>
+							<option value="">{t.all}</option>
+							{projects.map((p) => (
+								<option key={p} value={p}>
+									{p}
+								</option>
+							))}
+						</select>
+					</label>
 				)}
 			</div>
 
