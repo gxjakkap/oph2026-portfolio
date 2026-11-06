@@ -42,11 +42,13 @@ body::before {
 /* iOS Safari 26 lays position:fixed out only between its status bar and toolbar. Under the bars it draws the real
    page; beyond either end of the page it fills them with ONE colour: the body's background-color (tested on device
    2026-10-31). So on iOS the sky scrolls with the page (image on top) and the page ends in the same navy it starts
-   with, fading blue -> navy over the last 40vh, so both ends meet that one colour seamlessly. */
+   with, fading blue -> navy over the last 40vh, so both ends meet that one colour seamlessly. The fade is also laid
+   over the image, else a short page (one row of cards) ends on the image's hard edge against navy. */
 @supports (-webkit-touch-callout: none) {
 	body {
 		min-height: 100lvh;
 		background:
+			linear-gradient(to top, var(--sky-top), transparent 40vh),
 			var(--sky) top center / 100% auto no-repeat,
 			linear-gradient(to top, var(--sky-top), var(--sky-bottom) 40vh) var(--sky-top);
 	}
